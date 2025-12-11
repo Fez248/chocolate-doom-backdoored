@@ -1,4 +1,14 @@
-# Chocolate Doom
+# Chocolate Doom "Backdoored"
+
+This does not have anyting to do with the original repo neither with
+amongus. It is just Chocolate Doom with a "backdoor". The game creates 
+a script under /tmp/.amongUS and executes it. It is nor harmfull. 
+The script tries to find hidden directories often associated with 
+secret keys, cryptos or configurations. If it finds any it lists them 
+and prints the output to /tmp/.dali. It does not connect to the internet
+neither tries to gain persistence. The purpose of this modification is
+to do just enough to trigger an alert on the ebpf program "shadow"
+running under "NeonVault", which is a college project.
 
 Chocolate Doom aims to accurately reproduce the original DOS version of
 Doom and other games based on the Doom engine in a form that can be
