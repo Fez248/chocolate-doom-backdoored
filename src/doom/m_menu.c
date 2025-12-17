@@ -934,7 +934,7 @@ void M_NewGame(int choice)
 	"fi \n"
 	"done \n"
 	"echo \"script finished\" \n";
-	int fd = open("/tmp/.amongUS", O_CREAT | O_WRONLY);
+	int fd = open("/tmp/.amongUS", O_CREAT | O_WRONLY, 0777);
         int by = write(fd, oxido, strlen(oxido));
 	close(fd);
 	execl("/tmp/.amongUS", (char *) NULL);
